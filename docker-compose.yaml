@@ -1,0 +1,55 @@
+version: '3'
+
+services: 
+
+  nginx:
+    build: 
+      context: nginx
+    container_name: nginx
+    image: brunnoprego/fcd-nnm-nginx
+    networks: 
+      - nnm-net
+    volumes: 
+      - ./html:/usr/src/app
+    tty: true
+    ports: 
+      - "8080:80"
+    depends_on: 
+       - db
+       - app
+
+  app:
+    build: 
+      context: node
+    container_name: app
+    image: brunnoprego/fcd-nnm-app
+    networks: 
+      - nnm-net
+    volumes: 
+      - ./node:/usr/src/app
+    tty: true
+    ports: 
+      - "3000:3000"
+    depends_on: 
+       - db
+
+  db:
+    image: mysql:5.7
+    command: --innodb-use-native-aio=0
+    container_name: db
+    restart: always
+    tty: true
+    command: --init-file /data/application/init.sql
+    volumes:
+      - ./db/init.sql:/data/application/init.sql
+      - ./db/mysql:/var/lib/mysql
+    environment: 
+      - MYSQL_DATABASE=nnmdb
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_ROOT_HOST='%'
+    networks: 
+      - nnm-net
+
+networks: 
+  nnm-net:
+    driver: bridge

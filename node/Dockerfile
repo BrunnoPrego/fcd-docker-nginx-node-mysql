@@ -11,7 +11,7 @@ RUN wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSI
 
 COPY . .
 
-RUN npm install npx supervisor --save
+RUN npm install --save
 
 EXPOSE 3000
 

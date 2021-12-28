@@ -35,11 +35,10 @@ services:
 
   db:
     image: mysql:5.7
-    command: --innodb-use-native-aio=0
     container_name: db
     restart: always
     tty: true
-    command: --init-file /data/application/init.sql
+    command: --innodb-use-native-aio=0 --init-file /data/application/init.sql
     volumes:
       - ./db/init.sql:/data/application/init.sql
       - ./db/mysql:/var/lib/mysql

@@ -12,6 +12,7 @@
   "dependencies": {
     "express": "^4.17.2",
     "mysql": "^2.18.1",
+    "npx": "^10.2.2",
     "supervisor": "^0.12.0"
   }
 }

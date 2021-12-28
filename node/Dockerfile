@@ -11,6 +11,8 @@ RUN wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSI
 
 COPY . .
 
+RUN npm install -g --save
+
 EXPOSE 3000
 
 CMD ["dockerize", "-wait", "tcp://db:3306", "-timeout", "30s", "npx","supervisor","index.js"]

@@ -55,7 +55,7 @@ function consultaRegistros(config, req, res) {
             });
             linhas+='</table>'
             console.log(linhas);
-            res.send('<h1>Full Cycle Node!</h1><br><p>OK</p>' + linhas)
+            res.send('<h1>Full Cycle Rocks!</h1>' + linhas)
         } else {
             console.log('execução de query3 com erros: '+err.toString())
             res.send('execução de query3 com erros: '+err.toString())

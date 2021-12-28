@@ -13,6 +13,8 @@ COPY package*.json ./
 
 RUN npm install npx supervisor --save
 
+COPY . .
+
 EXPOSE 3000
 
 CMD ["dockerize", "-wait", "tcp://db:3306", "-timeout", "30s", "npx","supervisor","index.js"]
